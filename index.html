@@ -146,8 +146,8 @@
         <p class="localized lang-vi">
           - Ngôn ngữ lập trình: Java, C#, TypeScript, JavaScript, C++, C
         </p>
-        <p class="localized lang-en">- Frontend: Angular, React, Knockout.js</p>
-        <p class="localized lang-vi">- Frontend: Angular, React, Knockout.js</p>
+        <p class="localized lang-en">- Frontend: Angular, React, Vue, Knockout.js</p>
+        <p class="localized lang-vi">- Frontend: Angular, React, Vue, Knockout.js</p>
         <p class="localized lang-en">- Backend: .NET, Spring Boot</p>
         <p class="localized lang-vi">- Backend: .NET, Spring Boot</p>
         <p class="localized lang-en">- Databases: PostgreSQL, SQL Server</p>
@@ -482,30 +482,38 @@
                   href="https://github.com/hoathong99/MapMarkerUI"
                   >Repository</a
                 >
+                |
+                <a target="_blank"
+                rel="noopener noreferrer" href="https://hoathong99.github.io/MapMarkerUI/">Demo</a>
                 <details>
                   <summary>chi tiết</summary>
                   <ul style="width: 100%; padding-left: 5%">
                     <li>Sử dụng react-leaflet, openstreetmap.org</li>
+                    <li>Dùng nominatim API để tìm kiếm địa điểm</li>
                     <li>Tự động xin phép lấy dự liệu vị trí người để di chuyển bản đồ đến, vị trí mặc định đặt ở Chùa Một Cột</li>
                     <li>Lưu dữu liệu pin vào localstorage</li>
                     <li>Bản đồ có thể tương tác</li>
-                    <li>Cho phép người dùng để tạo, hiểm thị, chỉnh sửa, xóa pin trên map</li>
+                    <li>Cho phép người dùng để tạo, hiểm thị, chỉnh sửa, xóa pin/nhóm pin trên map</li>
                     <li>Chia sẻ pin đã tạo với người khác dưới dạng json</li>
                     <li>Hỗ trợ xuất và nạp database ở dạng json</li>
                   </ul>
                 </details>
               </li>
               <li class="localized lang-en">Interactive React web app for map pin storage and sharing | <a target="_blank"
-                rel="noopener noreferrer" href="https://github.com/hoathong99/MapMarkerUI">Repository</a>
+                rel="noopener noreferrer" href="https://github.com/hoathong99/MapMarkerUI">Repository</a> |
+                <a target="_blank"
+                rel="noopener noreferrer" href="https://hoathong99.github.io/MapMarkerUI/">Demo</a>
               <details>
                 <summary>Details</summary>
                 <ul style="width: 100%; padding-left: 5%">
-                    <li>Use react-leaflet, openstreetmap.org</li>
+                    <li>Use react-leaflet, openstreetmap.org for base interactive map</li>
+                    <li>Use nominatim API for location searching</li>
                     <li>Ask for user permission to get current geolocation for map center, default postion is Chua Mot Cot</li>
                     <li>Use localstorage for data storage</li>
                     <li>Interactive Map</li>
                     <li>Allow register, edit, deleted avaiable pin</li>
-                    <li>Share to other by json</li>
+                    <li>Allow register, delete aritical (box of pins with description)</li>
+                    <li>Share aritical(s) to other by json</li>
                     <li>Import, export database to json</li>
                 </ul>
               </details>
