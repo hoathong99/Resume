@@ -37,17 +37,7 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!--
-To deploy this resume on GitHub Pages:
-1. Create a new GitHub repository (e.g., `vu-ngoc-anh-resume`).
-2. Push this `index.html` file to the repository's `main` branch.
-3. Enable GitHub Pages in the repository settings:
-   - Go to Settings > Pages.
-   - Set the source to the `main` branch and the `/ (root)` folder.
-4. Access the resume at `https://<your-username>.github.io/vu-ngoc-anh-resume/`.
-5. To update, push changes to the `main` branch, and GitHub Pages will rebuild automatically.
--->
-<!DOCTYPE html>
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,47 +46,24 @@ To deploy this resume on GitHub Pages:
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print {
-            .no-print { display: none !important; }
+            .no-print { display: none; }
             body { margin: 0; }
             .bg-gray-100 { background-color: white; }
-            .shadow-xl { box-shadow: none; }
-            .rounded-lg { border-radius: 0; }
-            a { text-decoration: none; color: inherit; }
-        }
-        #sidebar {
-            transition: transform 0.3s ease-in-out;
-        }
-        #sidebar.hidden {
-            transform: translateX(100%);
         }
     </style>
 </head>
 <body class="bg-gray-100 font-sans leading-relaxed">
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 right-0 h-full w-48 bg-blue-900 text-white p-4 shadow-lg no-print z-50">
-        <button id="sidebar-toggle-close" class="text-white hover:text-blue-300 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <div class="space-y-2">
-            <button id="lang-toggle" class="w-full px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-800 transition duration-200">
+    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-8 my-10">
+        <!-- Language Toggle and Download Button -->
+        <div class="flex justify-end space-x-4 mb-6 no-print">
+            <button id="lang-toggle" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
                 Switch to Vietnamese
             </button>
-            <button id="download-pdf" class="w-full px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition duration-200">
-                Download PDF
+            <button id="download-btn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-200">
+                Download Resume
             </button>
         </div>
-    </div>
 
-    <!-- Sidebar Toggle Button -->
-    <button id="sidebar-toggle-open" class="fixed top-4 right-4 bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 no-print z-50">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
-
-    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-8 my-10">
         <!-- Header -->
         <header class="text-center mb-10">
             <h1 class="text-4xl font-bold text-gray-800 mb-3">
@@ -106,10 +73,11 @@ To deploy this resume on GitHub Pages:
             <div class="flex justify-center space-x-4 text-gray-600 text-sm">
                 <p><span class="lang-en">Phone:</span><span class="lang-vi hidden">Điện thoại:</span> 0824140576</p>
                 <span>|</span>
-                <p><span class="lang-en">Email:</span><span class="lang-vi hidden">Email:</span> <a href="mailto:hoathong99@gmail.com">hoathong99@gmail.com</a></p>
+                <p><span class="lang-en">Email:</span><span class="lang-vi hidden">Email:</span> <a href="hoathong99@gmail.com" class="text-blue-600 hover:underline">hoathong99@gmail.com</a></p>
                 <span>|</span>
-                
-                <p><span class="lang-en">Github:</span><span class="lang-vi hidden">Github:</span> <a href="https://github.com/hoathong99" target="_blank">Profile</a></p>
+                <p><span class="lang-en">Facebook:</span><span class="lang-vi hidden">Facebook:</span> <a href="#" class="text-blue-600 hover:underline">Profile</a></p>
+                <span>|</span>
+                <p><span class="lang-en">Github:</span><span class="lang-vi hidden">Github:</span> <a href="#" class="text-blue-600 hover:underline">Profile</a></p>
             </div>
         </header>
 
@@ -173,7 +141,7 @@ To deploy this resume on GitHub Pages:
             </h2>
             <div class="space-y-6">
                 <div>
-                    <h3 class="text-lg font-medium text-gray-700">Twendee <span class="text-gray-500">(2025)</span></h3>
+                    <h3 class="text-lg font-medium text-gray-700">Twendee - Developer <span class="text-gray-500">(2025)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Developed internal ERP system with dynamic workflow configuration (customizable processes, steps, definitions).</span>
                             <span class="lang-vi hidden">Phát triển hệ thống ERP nội bộ với cấu hình quy trình động (các quy trình, bước, định nghĩa có thể tùy chỉnh).</span></li>
@@ -186,7 +154,7 @@ To deploy this resume on GitHub Pages:
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem <span class="text-gray-500">(2022-2023)</span></h3>
+                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem - Intern to Full Stack Developer <span class="text-gray-500">(2022-2023)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Learned company’s custom framework and architecture.</span>
                             <span class="lang-vi hidden">Học framework và kiến trúc công ty sử dụng.</span></li>
@@ -195,7 +163,7 @@ To deploy this resume on GitHub Pages:
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-medium text-gray-700">OCG Technology <span class="text-gray-500">(2024)</span></h3>
+                    <h3 class="text-lg font-medium text-gray-700">OCG Technology - Intern <span class="text-gray-500">(2024)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Learned and used OutSystems low-code platform to develop and customize UI using vanilla JavaScript.</span>
                             <span class="lang-vi hidden">Học và sử dụng OutSystems low-code để phát triển ứng dụng, tùy chỉnh giao diện bằng vanilla JavaScript.</span></li>
@@ -229,8 +197,8 @@ To deploy this resume on GitHub Pages:
                         <span class="lang-vi hidden">HRM (NittsuSystem) - Quản lý nhân sự</span>
                     </h3>
                     <p class="text-gray-600 text-sm">
-                        <span class="lang-en">Team Size: 7</span>
-                        <span class="lang-vi hidden">Quy mô đội: 7</span>
+                        <span class="lang-en">Team Size: 7 | Position: Intern to Part-time Full Stack Developer</span>
+                        <span class="lang-vi hidden">Quy mô đội: 7 | Vị trí: Thực tập sinh -> Lập trình viên Full Stack bán thời gian</span>
                     </p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Investigated and fixed bugs, developed new UI screens.</span>
@@ -246,7 +214,7 @@ To deploy this resume on GitHub Pages:
                         <span class="lang-en">Student Management System (.NET, Blazor, SQL Server)</span>
                         <span class="lang-vi hidden">Quản lý sinh viên (.NET, Blazor, SQL Server)</span>
                     </h3>
-                    <!-- <p class="text-gray-600 text-sm"><a href="#">Repository</a></p> -->
+                    <p class="text-gray-600 text-sm"><a href="#" class="text-blue-600 hover:underline">Repository</a></p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Simple app mimicking school portal functions with role-based authorization (.NET Identity).</span>
                             <span class="lang-vi hidden">Ứng dụng mô phỏng cổng thông tin trường học với phân quyền dựa trên vai trò (.NET Identity).</span></li>
@@ -259,7 +227,7 @@ To deploy this resume on GitHub Pages:
                         <span class="lang-en">Cafe/Restaurant POS (Angular, .NET)</span>
                         <span class="lang-vi hidden">Cafe/Quán ăn POS (Angular, .NET)</span>
                     </h3>
-                    <!-- <p class="text-gray-600 text-sm"><a href="#">Repository of UI Demo</a></p> -->
+                    <p class="text-gray-600 text-sm"><a href="#" class="text-blue-600 hover:underline">Repository of UI Demo</a></p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">POS app with interactive UI, inspired by local cafes.</span>
                             <span class="lang-vi hidden">Ứng dụng POS với giao diện tương tác, lấy cảm hứng từ quán cà phê địa phương.</span></li>
@@ -282,7 +250,7 @@ To deploy this resume on GitHub Pages:
                         <span class="lang-en">Audio Player with Real-Time Subtitle Highlighting (Vue.js)</span>
                         <span class="lang-vi hidden">Mediaplayer với phụ đề thời gian thực (Vue.js)</span>
                     </h3>
-                    <!-- <p class="text-gray-600 text-sm"><a href="#">Repository</a></p> -->
+                    <p class="text-gray-600 text-sm"><a href="#" class="text-blue-600 hover:underline">Repository</a></p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Real-time word-by-word subtitle highlighting for audio playback.</span>
                             <span class="lang-vi hidden">Hiển thị phụ đề từng từ theo thời gian thực khi phát audio.</span></li>
@@ -296,9 +264,9 @@ To deploy this resume on GitHub Pages:
                         <span class="lang-vi hidden">Ứng dụng lưu trữ và chia sẻ pin bản đồ (React, Spring Boot)</span>
                     </h3>
                     <p class="text-gray-600 text-sm">
-                        <!-- <a href="#">Repository UI</a> |
-                        <a href="#">Repository Server</a> | -->
-                        <a href="https://hoathong99.github.io/MapMarkerUI/" target="_blank">Demo</a>
+                        <a href="#" class="text-blue-600 hover:underline">Repository UI</a> |
+                        <a href="#" class="text-blue-600 hover:underline">Repository Server</a> |
+                        <a href="#" class="text-blue-600 hover:underline">Demo</a>
                     </p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Interactive map app using react-leaflet and OpenStreetMap with Nominatim API for location search.</span>
@@ -312,19 +280,6 @@ To deploy this resume on GitHub Pages:
     </div>
 
     <script>
-        // Sidebar Toggle
-        const sidebar = document.getElementById('sidebar');
-        const toggleOpen = document.getElementById('sidebar-toggle-open');
-        const toggleClose = document.getElementById('sidebar-toggle-close');
-
-        toggleOpen.addEventListener('click', () => {
-            sidebar.classList.remove('hidden');
-        });
-
-        toggleClose.addEventListener('click', () => {
-            sidebar.classList.add('hidden');
-        });
-
         // Language Toggle
         const toggleButton = document.getElementById('lang-toggle');
         const enElements = document.querySelectorAll('.lang-en');
@@ -338,9 +293,17 @@ To deploy this resume on GitHub Pages:
                 : 'Switch to Vietnamese';
         });
 
-        // Download PDF
-        document.getElementById('download-pdf').addEventListener('click', () => {
-            window.print();
+        // Download Resume
+        const downloadBtn = document.getElementById('download-btn');
+        downloadBtn.addEventListener('click', () => {
+            const content = document.documentElement.outerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Vu_Ngoc_Anh_Resume.html';
+            a.click();
+            URL.revokeObjectURL(url);
         });
     </script>
 </body>
