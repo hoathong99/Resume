@@ -1,11 +1,11 @@
 <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
         if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
             try {
                 var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
@@ -19,11 +19,11 @@
 
                 // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                 var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                 );
                 // Fallback
                 if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
+                    headerRowIndex = 0;
                 }
 
                 // Convert filtered JSON back to CSV
@@ -36,8 +36,8 @@
             }
         }
         return gk_fileData[filename] || "";
-        }
-        </script><!--
+    }
+</script><!--
 To deploy this resume on GitHub Pages:
 1. Create a new GitHub repository (e.g., `vu-ngoc-anh-resume`).
 2. Push this `index.html` file to the repository's `main` branch.
@@ -49,6 +49,7 @@ To deploy this resume on GitHub Pages:
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,41 +57,66 @@ To deploy this resume on GitHub Pages:
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print {
-            .no-print { display: none !important; }
-            body { margin: 0; }
-            .bg-gray-100 { background-color: white; }
-            .shadow-xl { box-shadow: none; }
-            .rounded-lg { border-radius: 0; }
-            a { text-decoration: none; color: inherit; }
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            .bg-gray-100 {
+                background-color: white;
+            }
+
+            .shadow-xl {
+                box-shadow: none;
+            }
+
+            .rounded-lg {
+                border-radius: 0;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
         }
+
         #sidebar {
             transition: transform 0.3s ease-in-out;
         }
+
         #sidebar.hidden {
             transform: translateX(100%);
         }
     </style>
 </head>
+
 <body class="bg-gray-100 font-sans leading-relaxed">
     <!-- Sidebar -->
     <div id="sidebar" class="fixed top-0 right-0 h-full w-48 bg-blue-900 text-white p-4 shadow-lg no-print z-50">
         <button id="sidebar-toggle-close" class="text-white hover:text-blue-300 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         <div class="space-y-2">
-            <button id="lang-toggle" class="w-full px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-800 transition duration-200">
+            <button id="lang-toggle"
+                class="w-full px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-800 transition duration-200">
                 Switch to Vietnamese
             </button>
-            <button id="download-pdf" class="w-full px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition duration-200">
+            <button id="download-pdf"
+                class="w-full px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition duration-200">
                 Download PDF
             </button>
         </div>
     </div>
 
     <!-- Sidebar Toggle Button -->
-    <button id="sidebar-toggle-open" class="fixed top-4 right-4 bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 no-print z-50">
+    <button id="sidebar-toggle-open"
+        class="fixed top-4 right-4 bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 no-print z-50">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -106,10 +132,12 @@ To deploy this resume on GitHub Pages:
             <div class="flex justify-center space-x-4 text-gray-600 text-sm">
                 <p><span class="lang-en">Phone:</span><span class="lang-vi hidden">Điện thoại:</span> 0824140576</p>
                 <span>|</span>
-                <p><span class="lang-en">Email:</span><span class="lang-vi hidden">Email:</span> <a href="mailto:hoathong99@gmail.com">hoathong99@gmail.com</a></p>
+                <p><span class="lang-en">Email:</span><span class="lang-vi hidden">Email:</span> <a
+                        href="mailto:hoathong99@gmail.com">hoathong99@gmail.com</a></p>
                 <span>|</span>
-                
-                <p><span class="lang-en">Github:</span><span class="lang-vi hidden">Github:</span> <a href="https://github.com/hoathong99" target="_blank">Profile</a></p>
+
+                <p><span class="lang-en">Github:</span><span class="lang-vi hidden">Github:</span> <a
+                        href="https://github.com/hoathong99" target="_blank">Profile</a></p>
             </div>
         </header>
 
@@ -143,24 +171,34 @@ To deploy this resume on GitHub Pages:
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600">
                 <div>
-                    <p class="font-medium"><span class="lang-en">Programming Languages:</span><span class="lang-vi hidden">Ngôn ngữ lập trình:</span></p>
-                    <p><span class="lang-en">Java, C#, TypeScript, JavaScript, C++, C</span><span class="lang-vi hidden">Java, C#, TypeScript, JavaScript, C++, C</span></p>
+                    <p class="font-medium"><span class="lang-en">Programming Languages:</span><span
+                            class="lang-vi hidden">Ngôn ngữ lập trình:</span></p>
+                    <p><span class="lang-en">Java, C#, TypeScript, JavaScript, C++, C</span><span
+                            class="lang-vi hidden">Java, C#, TypeScript, JavaScript, C++, C</span></p>
                 </div>
                 <div>
-                    <p class="font-medium"><span class="lang-en">Frontend:</span><span class="lang-vi hidden">Frontend:</span></p>
-                    <p><span class="lang-en">Angular, React, Vue, Knockout.js</span><span class="lang-vi hidden">Angular, React, Vue, Knockout.js</span></p>
+                    <p class="font-medium"><span class="lang-en">Frontend:</span><span
+                            class="lang-vi hidden">Frontend:</span></p>
+                    <p><span class="lang-en">Angular, React, Vue, Knockout.js</span><span
+                            class="lang-vi hidden">Angular, React, Vue, Knockout.js</span></p>
                 </div>
                 <div>
-                    <p class="font-medium"><span class="lang-en">Backend:</span><span class="lang-vi hidden">Backend:</span></p>
-                    <p><span class="lang-en">.NET, Spring Boot, NestJS</span><span class="lang-vi hidden">.NET, Spring Boot, NestJS</span></p>
+                    <p class="font-medium"><span class="lang-en">Backend:</span><span
+                            class="lang-vi hidden">Backend:</span></p>
+                    <p><span class="lang-en">.NET, Spring Boot, NestJS</span><span class="lang-vi hidden">.NET, Spring
+                            Boot, NestJS</span></p>
                 </div>
                 <div>
-                    <p class="font-medium"><span class="lang-en">Databases:</span><span class="lang-vi hidden">Cơ sở dữ liệu:</span></p>
-                    <p><span class="lang-en">PostgreSQL, SQL Server</span><span class="lang-vi hidden">PostgreSQL, SQL Server</span></p>
+                    <p class="font-medium"><span class="lang-en">Databases:</span><span class="lang-vi hidden">Cơ sở dữ
+                            liệu:</span></p>
+                    <p><span class="lang-en">PostgreSQL, SQL Server</span><span class="lang-vi hidden">PostgreSQL, SQL
+                            Server</span></p>
                 </div>
                 <div>
-                    <p class="font-medium"><span class="lang-en">Tools:</span><span class="lang-vi hidden">Công cụ:</span></p>
-                    <p><span class="lang-en">OutSystems, Git, GitHub, Postman, n8n, Vercel</span><span class="lang-vi hidden">OutSystems, Git, GitHub, Postman, n8n, Vercel</span></p>
+                    <p class="font-medium"><span class="lang-en">Tools:</span><span class="lang-vi hidden">Công
+                            cụ:</span></p>
+                    <p><span class="lang-en">OutSystems, Git, GitHub, Postman, n8n, Vercel</span><span
+                            class="lang-vi hidden">OutSystems, Git, GitHub, Postman, n8n, Vercel</span></p>
                 </div>
             </div>
         </section>
@@ -175,30 +213,51 @@ To deploy this resume on GitHub Pages:
                 <div>
                     <h3 class="text-lg font-medium text-gray-700">Twendee <span class="text-gray-500">(2025)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Developed internal ERP system with dynamic workflow configuration (customizable processes, steps, definitions).</span>
-                            <span class="lang-vi hidden">Phát triển hệ thống ERP nội bộ với cấu hình quy trình động (các quy trình, bước, định nghĩa có thể tùy chỉnh).</span></li>
-                        <li><span class="lang-en">Integrated external automation via n8n and Telegram API for notifications.</span>
-                            <span class="lang-vi hidden">Tích hợp tự động hóa bên ngoài qua n8n và Telegram API cho thông báo.</span></li>
-                        <li><span class="lang-en">Built internal X (Twitter) account management platform, including tracking daily follow/unfollow activities, quote/like automation, and AI agent integration to filter tweets and auto-generate comments/quotes.</span>
-                            <span class="lang-vi hidden">Xây dựng nền tảng quản lý tài khoản X (Twitter) nội bộ, bao gồm theo dõi hoạt động follow/unfollow hàng ngày, tự động hóa quote/like, và tích hợp AI để lọc tweet và tự động tạo bình luận/quote.</span></li>
+                        <li><span class="lang-en">Developed internal ERP system with dynamic workflow configuration
+                                (customizable processes, steps, definitions).</span>
+                            <span class="lang-vi hidden">Phát triển hệ thống ERP nội bộ với cấu hình quy trình động (các
+                                quy trình, bước, định nghĩa có thể tùy chỉnh).</span>
+                        </li>
+                        <li><span class="lang-en">Integrated external automation via n8n and Telegram API for
+                                notifications.</span>
+                            <span class="lang-vi hidden">Tích hợp tự động hóa bên ngoài qua n8n và Telegram API cho
+                                thông báo.</span>
+                        </li>
+                        <li><span class="lang-en">Built internal X (Twitter) account management platform, including
+                                tracking daily follow/unfollow activities, quote/like automation, and AI agent
+                                integration to filter tweets and auto-generate comments/quotes.</span>
+                            <span class="lang-vi hidden">Xây dựng nền tảng quản lý tài khoản X (Twitter) nội bộ, bao gồm
+                                theo dõi hoạt động follow/unfollow hàng ngày, tự động hóa quote/like, và tích hợp AI để
+                                lọc tweet và tự động tạo bình luận/quote.</span>
+                        </li>
                         <li><span class="lang-en">Developed monitoring UI for the X automation system.</span>
-                            <span class="lang-vi hidden">Phát triển giao diện giám sát cho hệ thống tự động hóa X.</span></li>
+                            <span class="lang-vi hidden">Phát triển giao diện giám sát cho hệ thống tự động hóa
+                                X.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem <span class="text-gray-500">(2022-2023)</span></h3>
+                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem <span
+                            class="text-gray-500">(2022-2023)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Learned company’s custom framework and architecture.</span>
-                            <span class="lang-vi hidden">Học framework và kiến trúc công ty sử dụng.</span></li>
+                            <span class="lang-vi hidden">Học framework và kiến trúc công ty sử dụng.</span>
+                        </li>
                         <li><span class="lang-en">Developed product UI and maintained running products.</span>
-                            <span class="lang-vi hidden">Phát triển giao diện sản phẩm và bảo trì, sửa lỗi sản phẩm đang vận hành.</span></li>
+                            <span class="lang-vi hidden">Phát triển giao diện sản phẩm và bảo trì, sửa lỗi sản phẩm đang
+                                vận hành.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-medium text-gray-700">OCG Technology <span class="text-gray-500">(2024)</span></h3>
+                    <h3 class="text-lg font-medium text-gray-700">OCG Technology <span
+                            class="text-gray-500">(2024)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Learned and used OutSystems low-code platform to develop and customize UI using vanilla JavaScript.</span>
-                            <span class="lang-vi hidden">Học và sử dụng OutSystems low-code để phát triển ứng dụng, tùy chỉnh giao diện bằng vanilla JavaScript.</span></li>
+                        <li><span class="lang-en">Learned and used OutSystems low-code platform to develop and customize
+                                UI using vanilla JavaScript.</span>
+                            <span class="lang-vi hidden">Học và sử dụng OutSystems low-code để phát triển ứng dụng, tùy
+                                chỉnh giao diện bằng vanilla JavaScript.</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -212,7 +271,8 @@ To deploy this resume on GitHub Pages:
             </h2>
             <ul class="list-disc pl-5 text-gray-600 text-sm">
                 <li><span class="lang-en">TOEIC - 855 (2018)</span>
-                    <span class="lang-vi hidden">TOEIC - 855 (2018)</span></li>
+                    <span class="lang-vi hidden">TOEIC - 855 (2018)</span>
+                </li>
             </ul>
         </section>
 
@@ -234,11 +294,24 @@ To deploy this resume on GitHub Pages:
                     </p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Investigated and fixed bugs, developed new UI screens.</span>
-                            <span class="lang-vi hidden">Điều tra, tái hiện, sửa lỗi theo yêu cầu, tham gia phát triển giao diện mới.</span></li>
+                            <span class="lang-vi hidden">Điều tra, tái hiện, sửa lỗi theo yêu cầu, tham gia phát triển
+                                giao diện mới.</span>
+                        </li>
                         <li><span class="lang-en">Managed application section (port of company’s legacy product).</span>
-                            <span class="lang-vi hidden">Quản lý đơn xin, đăng ký (bản port lại sản phẩm cũ của công ty).</span></li>
-                        <li><span class="lang-en">Technologies: Java Core, TypeScript, Knockout.js, PostgreSQL, in-house UI framework.</span>
-                            <span class="lang-vi hidden">Công nghệ: Java Core, TypeScript, Knockout.js, PostgreSQL, framework UI tự phát triển.</span></li>
+                            <span class="lang-vi hidden">Quản lý đơn xin, đăng ký (bản port lại sản phẩm cũ của công
+                                ty).</span>
+                        </li>
+                        <li><span class="lang-en">Technologies: Java Core, TypeScript, Knockout.js, PostgreSQL, in-house
+                                UI framework.</span>
+                            <span class="lang-vi hidden">Công nghệ: Java Core, TypeScript, Knockout.js, PostgreSQL,
+                                framework UI tự phát triển.</span>
+                        </li>
+                        <li><span class="lang-en">Deployment flatform: Java Core, TypeScript, Knockout.js, PostgreSQL,
+                                in-house
+                                UI framework.</span>
+                            <span class="lang-vi hidden">Công nghệ: Java Core, TypeScript, Knockout.js, PostgreSQL,
+                                framework UI tự phát triển.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -248,10 +321,16 @@ To deploy this resume on GitHub Pages:
                     </h3>
                     <!-- <p class="text-gray-600 text-sm"><a href="#">Repository</a></p> -->
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Simple app mimicking school portal functions with role-based authorization (.NET Identity).</span>
-                            <span class="lang-vi hidden">Ứng dụng mô phỏng cổng thông tin trường học với phân quyền dựa trên vai trò (.NET Identity).</span></li>
-                        <li><span class="lang-en">Features: CRUD operations, class management, subject enrollment, GPA calculation, interactive timetable, academic transcript export.</span>
-                            <span class="lang-vi hidden">Tính năng: CRUD, quản lý lớp, đăng ký môn học, tính GPA, thời khóa biểu tương tác, xuất bảng điểm.</span></li>
+                        <li><span class="lang-en">Simple app mimicking school portal functions with role-based
+                                authorization (.NET Identity).</span>
+                            <span class="lang-vi hidden">Ứng dụng mô phỏng cổng thông tin trường học với phân quyền dựa
+                                trên vai trò (.NET Identity).</span>
+                        </li>
+                        <li><span class="lang-en">Features: CRUD operations, class management, subject enrollment, GPA
+                                calculation, interactive timetable, academic transcript export.</span>
+                            <span class="lang-vi hidden">Tính năng: CRUD, quản lý lớp, đăng ký môn học, tính GPA, thời
+                                khóa biểu tương tác, xuất bảng điểm.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -262,9 +341,14 @@ To deploy this resume on GitHub Pages:
                     <!-- <p class="text-gray-600 text-sm"><a href="#">Repository of UI Demo</a></p> -->
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">POS app with interactive UI, inspired by local cafes.</span>
-                            <span class="lang-vi hidden">Ứng dụng POS với giao diện tương tác, lấy cảm hứng từ quán cà phê địa phương.</span></li>
-                        <li><span class="lang-en">Features: Area/table management, food/drink management, bill management, takeaway/at-shop service.</span>
-                            <span class="lang-vi hidden">Tính năng: Quản lý khu vực/bàn, quản lý đồ ăn/thức uống, quản lý hóa đơn, dịch vụ mang đi/tại quán.</span></li>
+                            <span class="lang-vi hidden">Ứng dụng POS với giao diện tương tác, lấy cảm hứng từ quán cà
+                                phê địa phương.</span>
+                        </li>
+                        <li><span class="lang-en">Features: Area/table management, food/drink management, bill
+                                management, takeaway/at-shop service.</span>
+                            <span class="lang-vi hidden">Tính năng: Quản lý khu vực/bàn, quản lý đồ ăn/thức uống, quản
+                                lý hóa đơn, dịch vụ mang đi/tại quán.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -274,7 +358,8 @@ To deploy this resume on GitHub Pages:
                     </h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
                         <li><span class="lang-en">Counts people wearing masks using YOLOv8.</span>
-                            <span class="lang-vi hidden">Đếm số người đeo khẩu trang bằng YOLOv8.</span></li>
+                            <span class="lang-vi hidden">Đếm số người đeo khẩu trang bằng YOLOv8.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -284,10 +369,14 @@ To deploy this resume on GitHub Pages:
                     </h3>
                     <!-- <p class="text-gray-600 text-sm"><a href="#">Repository</a></p> -->
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Real-time word-by-word subtitle highlighting for audio playback.</span>
-                            <span class="lang-vi hidden">Hiển thị phụ đề từng từ theo thời gian thực khi phát audio.</span></li>
+                        <li><span class="lang-en">Real-time word-by-word subtitle highlighting for audio
+                                playback.</span>
+                            <span class="lang-vi hidden">Hiển thị phụ đề từng từ theo thời gian thực khi phát
+                                audio.</span>
+                        </li>
                         <li><span class="lang-en">Supports .ogg audio and JSON subtitle files.</span>
-                            <span class="lang-vi hidden">Hỗ trợ file audio .ogg và phụ đề định dạng JSON.</span></li>
+                            <span class="lang-vi hidden">Hỗ trợ file audio .ogg và phụ đề định dạng JSON.</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -301,12 +390,55 @@ To deploy this resume on GitHub Pages:
                         <a href="https://hoathong99.github.io/MapMarkerUI/" target="_blank">Demo</a>
                     </p>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Interactive map app using react-leaflet and OpenStreetMap with Nominatim API for location search.</span>
-                            <span class="lang-vi hidden">Ứng dụng bản đồ tương tác sử dụng react-leaflet và OpenStreetMap với Nominatim API để tìm kiếm địa điểm.</span></li>
-                        <li><span class="lang-en">Features: Pin management, user management, JSON-based sharing, local storage for demo.</span>
-                            <span class="lang-vi hidden">Tính năng: Quản lý pin, quản lý người dùng, chia sẻ dựa trên JSON, lưu trữ cục bộ cho demo.</span></li>
+                        <li><span class="lang-en">Interactive map app using react-leaflet and OpenStreetMap with
+                                Nominatim API for location search.</span>
+                            <span class="lang-vi hidden">Ứng dụng bản đồ tương tác sử dụng react-leaflet và
+                                OpenStreetMap với Nominatim API để tìm kiếm địa điểm.</span>
+                        </li>
+                        <li><span class="lang-en">Features: Pin management, user management, JSON-based sharing, local
+                                storage for demo.</span>
+                            <span class="lang-vi hidden">Tính năng: Quản lý pin, quản lý người dùng, chia sẻ dựa trên
+                                JSON, lưu trữ cục bộ cho demo.</span>
+                        </li>
                     </ul>
                 </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700">
+                        <span class="lang-en">Twitter Automation Bot with AI Agent integrated for quoting and AI
+                            generated comment </span>
+                        <span class="lang-vi hidden">Twitter Bot tự động quote bài vào tạo quote động dựa vào AI
+                            Agent</span>
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        <!-- <a href="#">Repository UI</a> |
+                        <a href="#">Repository Server</a> | -->
+                        <a href="https://github.com/hoathong99/N8N_X_UI" target="_blank">Repository</a>
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-600 text-sm">
+                        <li><span class="lang-en">Allow user to setup and customize X quote bot to daily quote tweets
+                                base on customizable criteria with AI generated comment</span>
+                            <span class="lang-vi hidden">Ứng dụng cho phép người dùng set up và cấu hình bot Twitter
+                                đăng bài quote tự động hằng này với nội dung AI tự sinh</span>
+                        </li>
+                        <li><span class="lang-en">Features: Fully automated proccess of getting tweets, process tweets,
+                                quoting tweets with AI generated conent, Easy to use UI with detail instruction,
+                                customizable setting
+                                for any X account, any criteria user set,
+                                track current app process including RAW tweet input, and AI processed tweet, allow
+                                manual intervention
+                            </span>
+                            <span class="lang-vi hidden">Tính năng: Quy trình đọc, tự lọc, sinh nội dung hoàn toàn tự
+                                động,
+                                UI thân thiện người dùng với hướng dẫn chi tiết, cài
+                                đặt tùy chỉnh
+                                cho bất kỳ tài khoản X nào, theo tiêu chí người dùng đặt,
+                                theo dõi quy trình ứng dụng hiện tại bao gồm tweet đầu vào và tweet được xử lý bằng
+                                AI, cho phép can thiệp thủ công quy trình tự động
+                                .</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </section>
     </div>
@@ -333,8 +465,8 @@ To deploy this resume on GitHub Pages:
         toggleButton.addEventListener('click', () => {
             enElements.forEach(el => el.classList.toggle('hidden'));
             viElements.forEach(el => el.classList.toggle('hidden'));
-            toggleButton.textContent = toggleButton.textContent.includes('Vietnamese') 
-                ? 'Switch to English' 
+            toggleButton.textContent = toggleButton.textContent.includes('Vietnamese')
+                ? 'Switch to English'
                 : 'Switch to Vietnamese';
         });
 
@@ -344,4 +476,5 @@ To deploy this resume on GitHub Pages:
         });
     </script>
 </body>
+
 </html>
