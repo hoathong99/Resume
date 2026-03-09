@@ -1,128 +1,84 @@
-<script type="text/javascript">
-    var gk_isXlsx = false;
-    var gk_xlsxFileLookup = {};
-    var gk_fileData = {};
-    function filledCell(cell) {
-        return cell !== '' && cell != null;
-    }
-    function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                    headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-    }
-</script><!--
-To deploy this resume on GitHub Pages:
-1. Create a new GitHub repository (e.g., `vu-ngoc-anh-resume`).
-2. Push this `index.html` file to the repository's `main` branch.
-3. Enable GitHub Pages in the repository settings:
-   - Go to Settings > Pages.
-   - Set the source to the `main` branch and the `/ (root)` folder.
-4. Access the resume at `https://<your-username>.github.io/vu-ngoc-anh-resume/`.
-5. To update, push changes to the `main` branch, and GitHub Pages will rebuild automatically.
--->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vu Ngoc Anh - Resume</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @media print {
-            .no-print {
-                display: none !important;
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vu Ngoc Anh - Resume</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-            body {
-                margin: 0;
-            }
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
 
-            .bg-gray-100 {
-                background-color: white;
-            }
+      body {
+        margin: 0;
+      }
 
-            .shadow-xl {
-                box-shadow: none;
-            }
+      .bg-gray-100 {
+        background-color: white;
+      }
 
-            .rounded-lg {
-                border-radius: 0;
-            }
+      .shadow-xl {
+        box-shadow: none;
+      }
 
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
-        }
+      .rounded-lg {
+        border-radius: 0;
+      }
 
-        #sidebar {
-            transition: transform 0.3s ease-in-out;
-        }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
 
-        #sidebar.hidden {
-            transform: translateX(100%);
-        }
-    </style>
+    /* Smooth sidebar animation */
+    #sidebar {
+      transform: translateX(100%);
+      transition: transform .35s ease;
+    }
+
+    #sidebar.open {
+      transform: translateX(0);
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 font-sans leading-relaxed">
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 right-0 h-full w-48 bg-blue-900 text-white p-4 shadow-lg no-print z-50">
-        <button id="sidebar-toggle-close" class="text-white hover:text-blue-300 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <div class="space-y-2">
-            <button id="lang-toggle"
-                class="w-full px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-800 transition duration-200">
-                Switch to Vietnamese
-            </button>
-            <button id="download-pdf"
-                class="w-full px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition duration-200">
-                Download PDF
-            </button>
-        </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed top-0 right-0 h-full w-48 bg-blue-900 text-white p-4 shadow-lg no-print z-50">
+
+    <div class="mt-10 space-y-3">
+
+      <button id="lang-toggle"
+        class="w-full px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-800 transition duration-200">
+        Switch to Vietnamese
+      </button>
+
+      <button id="download-pdf"
+        class="w-full px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition duration-200">
+        Download PDF
+      </button>
+
     </div>
 
-    <!-- Sidebar Toggle Button -->
-    <button id="sidebar-toggle-open"
-        class="fixed top-4 right-4 bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 no-print z-50">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
+  </div>
 
-    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-8 my-10">
+  <!-- Sidebar Toggle Button -->
+  <button id="sidebar-toggle-open"
+    class="fixed top-3 right-4 bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 no-print z-50">
+
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+
+  </button>
+
+  <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-8 my-10">
         <!-- Header -->
         <header class="text-center mb-10">
             <h1 class="text-4xl font-bold text-gray-800 mb-3">
@@ -197,8 +153,8 @@ To deploy this resume on GitHub Pages:
                 <div>
                     <p class="font-medium"><span class="lang-en">Tools:</span><span class="lang-vi hidden">Công
                             cụ:</span></p>
-                    <p><span class="lang-en">OutSystems, Git, GitHub, Postman, n8n, Vercel, Netify</span><span
-                            class="lang-vi hidden">OutSystems, Git, GitHub, Postman, n8n, Vercel, Netify</span></p>
+                    <p><span class="lang-en">OutSystems, Servicenow, Git, GitHub, Postman, n8n, Vercel, Netify</span><span
+                            class="lang-vi hidden">OutSystems, Servicenow, Git, GitHub, Postman, n8n, Vercel, Netify</span></p>
                 </div>
             </div>
         </section>
@@ -210,6 +166,40 @@ To deploy this resume on GitHub Pages:
                 <span class="lang-vi hidden">Kinh nghiệm làm việc</span>
             </h2>
             <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem <span
+                            class="text-gray-500">(2022-2023)</span></h3>
+                    <ul class="list-disc pl-5 text-gray-600 text-sm">
+                        <li><span class="lang-en">Learned company’s custom framework and architecture.</span>
+                            <span class="lang-vi hidden">Học framework và kiến trúc công ty sử dụng.</span>
+                        </li>
+                        <li><span class="lang-en">Developed product UI and maintained running products.</span>
+                            <span class="lang-vi hidden">Phát triển giao diện sản phẩm và bảo trì, sửa lỗi sản phẩm đang
+                                vận hành.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700">OCG Technology <span
+                            class="text-gray-500">(2024)</span></h3>
+                    <ul class="list-disc pl-5 text-gray-600 text-sm">
+                        <li><span class="lang-en">Learned and used OutSystems low-code platform to develop and customize
+                                UI using vanilla JavaScript.</span>
+                            <span class="lang-vi hidden">Học và sử dụng OutSystems low-code để phát triển ứng dụng, tùy
+                                chỉnh giao diện bằng vanilla JavaScript.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700">GEM corp - Full-time Developer <span
+                            class="text-gray-500">(2025)</span></h3>
+                    <ul class="list-disc pl-5 text-gray-600 text-sm">
+                        <li><span class="lang-en">Developing, maintaining customer's Servicenow instance.</span>
+                            <span class="lang-vi hidden">Học và sử dụng Servicenow theo yêu cầu của khách hàng trong
+                                việc xây dựng, bảo trì, phát triển hệ thống quản lý Servicenow của khách hàng.</span>
+                        </li>
+                    </ul>
+                </div>
                 <div>
                     <h3 class="text-lg font-medium text-gray-700">Twendee <span class="text-gray-500">(2025)</span></h3>
                     <ul class="list-disc pl-5 text-gray-600 text-sm">
@@ -236,30 +226,6 @@ To deploy this resume on GitHub Pages:
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-medium text-gray-700">NittsuSystem <span
-                            class="text-gray-500">(2022-2023)</span></h3>
-                    <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Learned company’s custom framework and architecture.</span>
-                            <span class="lang-vi hidden">Học framework và kiến trúc công ty sử dụng.</span>
-                        </li>
-                        <li><span class="lang-en">Developed product UI and maintained running products.</span>
-                            <span class="lang-vi hidden">Phát triển giao diện sản phẩm và bảo trì, sửa lỗi sản phẩm đang
-                                vận hành.</span>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-medium text-gray-700">OCG Technology <span
-                            class="text-gray-500">(2024)</span></h3>
-                    <ul class="list-disc pl-5 text-gray-600 text-sm">
-                        <li><span class="lang-en">Learned and used OutSystems low-code platform to develop and customize
-                                UI using vanilla JavaScript.</span>
-                            <span class="lang-vi hidden">Học và sử dụng OutSystems low-code để phát triển ứng dụng, tùy
-                                chỉnh giao diện bằng vanilla JavaScript.</span>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </section>
 
@@ -272,6 +238,9 @@ To deploy this resume on GitHub Pages:
             <ul class="list-disc pl-5 text-gray-600 text-sm">
                 <li><span class="lang-en">TOEIC - 855 (2018)</span>
                     <span class="lang-vi hidden">TOEIC - 855 (2018)</span>
+                </li>
+                <li><span class="lang-en">Servicenow CSA (2025)</span>
+                    <span class="lang-vi hidden">Servicenow CSA (2025)</span>
                 </li>
             </ul>
         </section>
@@ -405,9 +374,9 @@ To deploy this resume on GitHub Pages:
                 <div>
                     <h3 class="text-lg font-medium text-gray-700">
                         <span class="lang-en">Twitter Automation Bot with AI Agent integrated for quoting and AI
-                            generated comment </span>
+                            generated comment (n8n integrated with tradition webapp) </span>
                         <span class="lang-vi hidden">Twitter Bot tự động quote bài vào tạo quote động dựa vào AI
-                            Agent</span>
+                            Agent (webapp truyền thống tích hợp với n8n)</span>
                     </h3>
                     <p class="text-gray-600 text-sm">
                         <!-- <a href="#">Repository UI</a> |
@@ -438,43 +407,63 @@ To deploy this resume on GitHub Pages:
                         </li>
                     </ul>
                 </div>
-
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700">
+                        <span class="lang-en">Servicenow Instance Development and Maintenance</span>
+                        <span class="lang-vi hidden">Phát triển và bảo trì instance Servicenow</span>
+                    </h3>
+                    <ul class="list-disc pl-5 text-gray-600 text-sm">
+                        <li><span class="lang-en">Maintaing and developing customer's Servicenow instance for company management.</span>
+                            <span class="lang-vi hidden">Xây dựng, bảo trì, phát triển hệ thống quản lý Servicenow của khách hàng.</span>
+                        </li>
+                        <li><span class="lang-en">Features: ticket management, user/group/role management, automated workflows, automated test ...</span>
+                            <span class="lang-vi hidden">Tính năng: quản lý đơn từ, quản lý người dùng/nhóm/quyền, thực hiện tự động hóa các quy trình, test tự động ...</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     </div>
 
-    <script>
-        // Sidebar Toggle
-        const sidebar = document.getElementById('sidebar');
-        const toggleOpen = document.getElementById('sidebar-toggle-open');
-        const toggleClose = document.getElementById('sidebar-toggle-close');
+  <script>
 
-        toggleOpen.addEventListener('click', () => {
-            sidebar.classList.remove('hidden');
-        });
+    /* Sidebar Toggle */
 
-        toggleClose.addEventListener('click', () => {
-            sidebar.classList.add('hidden');
-        });
+    const sidebar = document.getElementById('sidebar');
+    const toggleButton = document.getElementById('sidebar-toggle-open');
 
-        // Language Toggle
-        const toggleButton = document.getElementById('lang-toggle');
-        const enElements = document.querySelectorAll('.lang-en');
-        const viElements = document.querySelectorAll('.lang-vi');
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
 
-        toggleButton.addEventListener('click', () => {
-            enElements.forEach(el => el.classList.toggle('hidden'));
-            viElements.forEach(el => el.classList.toggle('hidden'));
-            toggleButton.textContent = toggleButton.textContent.includes('Vietnamese')
-                ? 'Switch to English'
-                : 'Switch to Vietnamese';
-        });
 
-        // Download PDF
-        document.getElementById('download-pdf').addEventListener('click', () => {
-            window.print();
-        });
-    </script>
+    /* Language Toggle */
+
+    const toggleLang = document.getElementById('lang-toggle');
+    const enElements = document.querySelectorAll('.lang-en');
+    const viElements = document.querySelectorAll('.lang-vi');
+
+    toggleLang.addEventListener('click', () => {
+
+      enElements.forEach(el => el.classList.toggle('hidden'));
+      viElements.forEach(el => el.classList.toggle('hidden'));
+
+      toggleLang.textContent =
+        toggleLang.textContent.includes('Vietnamese')
+          ? 'Switch to English'
+          : 'Switch to Vietnamese';
+
+    });
+
+
+    /* Download PDF */
+
+    document.getElementById('download-pdf').addEventListener('click', () => {
+      window.print();
+    });
+
+  </script>
+
 </body>
 
 </html>
